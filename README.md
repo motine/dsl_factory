@@ -148,13 +148,14 @@ ButtonDsl = DslFactory.define_dsl do
   # all types outlined above support callbacks
   any :trigger, callback: ->(value) { puts "#{value} was triggered" }
   any :snicker, callback: ->(value) { arg1, arg2 = value; puts "snicker: #{arg1} & #{arg2}" } # we can pass arguments via the value
-  any :clicker, callback: ->(value) { self.do_the_click }
+  any :clicker, callback: ->(value) { self.do_the_click } # see method definition in using class
+  numeric :width, callback: ->(value) { raise DslFactory::ValidationError, 'buttons must be small' if width > 100 }
 
   # for arrays the callback always receives an array (even if it was used in singular form)
   # for hashes the callback receives two arguments: key, value
 end
 
-class Sabine
+class MonsterButton
   extend ButtonDsl
   # if we want to call a method of the class, we need to define it before the first usage of the DSL method
   def self.do_the_click
@@ -163,8 +164,11 @@ class Sabine
 
   trigger 'abc'            # -> abc was triggered
   snicker ['haha', 'hihi'] # -> snicker: haha & hihi
-  clicker nil              # make sure to alway pass a value, -> Click!
+  clicker nil              # make sure to alway pass a value; -> Click!
+  width 2000               # -> DslFactory::ValidationError: buttons must be small
 end
+
+MonsterButton.trigger # values are still set; => 'abc'
 ```
 
 ## Use of the definition
