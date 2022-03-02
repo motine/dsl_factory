@@ -101,8 +101,8 @@ class World
   country_size 'Germany', 357_022
 end
 
-SmartyPants.capital_for_countries # => { 'Berlin' => 'Germany', 'Copenhagen' => 'Denmark'}
-SmartyPants.country_sizes # => { 'Germany' => 357022 }
+World.capital_for_countries # => { 'Berlin' => 'Germany', 'Copenhagen' => 'Denmark'}
+World.country_sizes # => { 'Germany' => 357022 }
 ```
 
 **Nested DSLs**
@@ -184,7 +184,7 @@ end
 LakeSuperior.lake_name # => 'Lake Superior'
 ```
 
-However we can also the **DSL in a variable**:
+However we can also use the **DSL in a variable**:
 
 ```ruby
 @config = Module.new.extend(LakeDsl)
