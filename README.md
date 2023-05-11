@@ -206,6 +206,14 @@ end
 
 ```
 
+# Compatibility
+
+The gem was/is used in production with the following Ruby versions:
+
+- ✅ Ruby 2.7
+- ✅ Ruby 3.0
+- ✅ Ruby 3.1
+
 # Development
 
 ```bash
