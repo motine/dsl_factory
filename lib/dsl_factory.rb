@@ -7,8 +7,9 @@ module DslFactory
   class DefinitionError < StandardError; end
   class ValidationError < StandardError; end
 
-  def define_dsl(&block)
+  def define_dsl(inspectable: false, &block)
     generator = DslFactory::Generator.new
+    generator.define_inspect if inspectable
     generator.instance_eval(&block)
     return generator.definition
   end

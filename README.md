@@ -171,6 +171,12 @@ end
 MonsterButton.trigger # values are still set; => 'abc'
 ```
 
+**Inspection**
+
+For debugging it is useful to introspect the DSL values.
+When `inspectable` is set to `true` (`DslFactory.define_dsl(inspectable: true)`) the module will provide an `inspect` method.
+All sub-DSL modules provide an such a method by default.
+
 ## Use of the definition
 
 Usually we **extend a class** like so:
@@ -214,7 +220,7 @@ bundle install
 rake test # run the tests
 pry # require_relative 'lib/dsl_factory.rb'
 
-# to release a new version, update the version number in `version.rb`, then run
+# to release a new version, update `CHANGELOG.md` and the version number in `version.rb`, then run
 bundle exec rake release
 ```
 

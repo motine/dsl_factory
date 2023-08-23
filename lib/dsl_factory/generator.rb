@@ -15,6 +15,12 @@ class DslFactory::Generator
     end
   end
 
+  def define_inspect
+    @definition.define_method(:inspect) do
+      "DSL#{@dsl_values.inspect}"
+    end
+  end
+
   # for more information & examples, please see README.md
   #
   # if a `callback` is given it will be called when the extended class uses this attribute (after setting the value).
@@ -70,7 +76,7 @@ class DslFactory::Generator
 
       if block # we deal with a sub-DSL
         value_object = Class.new
-        value_object.extend(DslFactory.define_dsl(&definition_block))
+        value_object.extend(DslFactory.define_dsl(inspectable: true, &definition_block))
         value_object.instance_eval(&block)
         value = value_object
       end
@@ -97,7 +103,7 @@ class DslFactory::Generator
 
       if block # we deal with a sub-DSL
         value_object = Class.new
-        value_object.extend(DslFactory.define_dsl(&definition_block))
+        value_object.extend(DslFactory.define_dsl(inspectable: true, &definition_block))
         value_object.instance_eval(&block)
         value = value_object
       end

@@ -48,4 +48,24 @@ class BasicTest < Minitest::Test
     end
     assert_equal(3, using_class.sum)
   end
+
+  ListDefinition = DslFactory.define_dsl(inspectable: true) do
+    array :items do
+      string :label
+    end
+  end
+
+  def test_inspection
+    using_class = Class.new do
+      extend ListDefinition
+      item { label 'eins' }
+      item { label 'zwei' }
+    end
+
+    assert_includes(using_class.inspect, 'items')
+    assert_includes(using_class.inspect, 'eins')
+    assert_includes(using_class.items.inspect, 'eins')
+    assert_includes(using_class.items.inspect, 'zwei')
+    assert_includes(using_class.items.first.inspect, 'eins')
+  end
 end

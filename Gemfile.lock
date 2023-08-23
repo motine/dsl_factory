@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dsl_factory (0.1.0)
+    dsl_factory (0.2.0)
       activesupport (>= 5.0)
 
 GEM
